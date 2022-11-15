@@ -18,28 +18,36 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
-@Table(name = "Danh_Muc")
+/**
+ *
+ * @author son45
+ */
 @Entity
+@Table(name = "Khuyen_Mai")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class DanhMuc {
+public class Loai {
 
     @Id
     @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
     @GeneratedValue(generator = "generator")
-    @Column(name = "IdDanhMuc", columnDefinition = "uniqueidentifier", nullable = false)
-    private String idDanhMuc;
+    @Column(name = "IdLoai", columnDefinition = "uniqueidentifier", nullable = false)
+    private String idLoai;
 
-    @Column(name = "maDanhMuc", nullable = false)
-    private String maDanhMuc;
+    @ManyToOne()
+    @JoinColumn(name = "IdDanhMuc", nullable = false)
+    private DanhMuc danhMuc;
 
-    @Column(name = "TenDanhMuc", nullable = false)
-    private String tenDanhMuc;
+    @Column(name = "MaLoai", nullable = false)
+    private String maLoai;
 
-    @Column(name = "TrangThai")
-    private Integer trangThai;
+    @Column(name = "TenLoai", nullable = false)
+    private String tenLoai;
+
+    @Column(name = "TrangThai", nullable = true)
+    private int trangThai;
 
 }

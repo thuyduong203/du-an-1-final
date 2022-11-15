@@ -55,13 +55,12 @@ public class DanhMucRepository implements ICommonRepository<DanhMuc, Boolean, St
 
     @Override
     public Boolean update(DanhMuc kh, String ma) {
-        String hql = "UPDATE " + fromTable + "SET loai = :loai,tenDanhMuc = :tenDanhMuc WHERE maDanhMuc = :ma ";
+        String hql = "UPDATE " + fromTable + "SET tenDanhMuc = :tenDanhMuc WHERE maDanhMuc = :ma ";
         Transaction transaction = null;
         int check = 0;
         try {
             transaction = session.beginTransaction();
             Query query = session.createQuery(hql);
-            query.setParameter("loai", kh.getLoai());
             query.setParameter("tenDanhMuc", kh.getTenDanhMuc());
             query.setParameter("ma", ma);
             check = query.executeUpdate();
@@ -123,7 +122,6 @@ public class DanhMucRepository implements ICommonRepository<DanhMuc, Boolean, St
 //        System.out.println(new DanhMucRepository().addDanhMucHQL(danhMuc));
 //thêm danh mục
         DanhMuc danhMuc = new DanhMuc();
-        danhMuc.setLoai(null);
         danhMuc.setMaDanhMuc("DM1");
         danhMuc.setTenDanhMuc("Đồ uống");
         danhMuc.setTrangThai(0);

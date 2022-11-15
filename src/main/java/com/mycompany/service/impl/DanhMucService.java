@@ -60,10 +60,10 @@ public class DanhMucService implements ICommonService<DanhMuc, String> {
 //        DanhMuc dm = new DanhMuc(null, loai, "DM04", "Nước uống có ga", 0);
 //        String test = new DanhMucService().add(dm);
 //        System.out.println(test);
-        List<DanhMuc> danhMucs = new DanhMucService().getAll();
-        for (DanhMuc danhMuc : danhMucs) {
-            System.out.println(danhMuc.getIdDanhMuc()+" "+danhMuc.getLoai().getIdDanhMuc()+" "+danhMuc.getTenDanhMuc());
-    }
+//        List<DanhMuc> danhMucs = new DanhMucService().getAll();
+//        for (DanhMuc danhMuc : danhMucs) {
+//            System.out.println(danhMuc.getIdDanhMuc()+" "+danhMuc.getLoai().getIdDanhMuc()+" "+danhMuc.getTenDanhMuc());
+//    }
     }
 
 }

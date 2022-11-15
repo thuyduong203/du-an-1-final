@@ -187,10 +187,20 @@ public class ViewBan extends javax.swing.JFrame {
         btnHoaDon.setBackground(new java.awt.Color(204, 204, 204));
         btnHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHoaDon.setText("HÓA ĐƠN");
+        btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoaDonActionPerformed(evt);
+            }
+        });
 
         btnKhachHang.setBackground(new java.awt.Color(204, 204, 204));
         btnKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhachHang.setText("KHÁCH HÀNG");
+        btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhachHangActionPerformed(evt);
+            }
+        });
 
         btnBan.setBackground(new java.awt.Color(255, 255, 153));
         btnBan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -204,6 +214,11 @@ public class ViewBan extends javax.swing.JFrame {
         btnKhuyenMai.setBackground(new java.awt.Color(204, 204, 204));
         btnKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhuyenMai.setText("KHUYẾN MÃI");
+        btnKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhuyenMaiActionPerformed(evt);
+            }
+        });
 
         btnSanPham.setBackground(new java.awt.Color(204, 204, 204));
         btnSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -639,6 +654,27 @@ public class ViewBan extends javax.swing.JFrame {
         this.dispose();
         viewThongKe.setVisible(true);
     }//GEN-LAST:event_btnThongKeActionPerformed
+
+    private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
+        // TODO add your handling code here:
+        ViewKhuyenMai viewKhuyenMai = new ViewKhuyenMai(nv);
+        this.dispose();
+        viewKhuyenMai.setVisible(true);
+    }//GEN-LAST:event_btnKhuyenMaiActionPerformed
+
+    private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
+        // TODO add your handling code here:
+        ViewHoaDon viewHoaDon = new ViewHoaDon(nv);
+        this.dispose();
+        viewHoaDon.setVisible(true);
+    }//GEN-LAST:event_btnHoaDonActionPerformed
+
+    private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+        // TODO add your handling code here:
+        ViewKhachHang viewKhachHang = new ViewKhachHang(nv);
+        this.dispose();
+        viewKhachHang.setVisible(true);
+    }//GEN-LAST:event_btnKhachHangActionPerformed
 
     /**
      * @param args the command line arguments

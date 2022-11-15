@@ -23,7 +23,7 @@ public class DanhMucRepository implements ICommonRepository<DanhMuc, Boolean, St
 
     @Override
     public List<DanhMuc> getAll() {
-        String hql = fromTable + "WHERE trangThai = 0";
+        String hql = fromTable;
         Query query = session.createQuery(hql);
         List<DanhMuc> danhMucs = query.getResultList();
         return danhMucs;
@@ -55,13 +55,14 @@ public class DanhMucRepository implements ICommonRepository<DanhMuc, Boolean, St
 
     @Override
     public Boolean update(DanhMuc kh, String ma) {
-        String hql = "UPDATE " + fromTable + "SET tenDanhMuc = :tenDanhMuc WHERE maDanhMuc = :ma ";
+        String hql = "UPDATE " + fromTable + "SET tenDanhMuc = :tenDanhMuc, trangThai = :trangThaiDM WHERE maDanhMuc = :ma ";
         Transaction transaction = null;
         int check = 0;
         try {
             transaction = session.beginTransaction();
             Query query = session.createQuery(hql);
             query.setParameter("tenDanhMuc", kh.getTenDanhMuc());
+            query.setParameter("trangThaiDM", kh.getTrangThai());
             query.setParameter("ma", ma);
             check = query.executeUpdate();
             transaction.commit();
@@ -90,42 +91,17 @@ public class DanhMucRepository implements ICommonRepository<DanhMuc, Boolean, St
         return check > 0;
     }
 
-    /////add = hql
-    public boolean addDanhMucHQL(DanhMuc danhMuc) {
-        int check = 0;
-        try ( Session session = HibernateUtil.getFactory().openSession()) {
-            Transaction transaction = session.getTransaction();
-            transaction.begin();
-            try {
-                Query query = session.createQuery("INSERT INTO DanhMuc(maDanhMuc, tenDanhMuc, trangThai) "
-                        + " VALUES (:maDM, :tenDM, :trangThaiDM)");
-                query.setParameter("maDM", danhMuc.getMaDanhMuc());
-                query.setParameter("tenDM", danhMuc.getTenDanhMuc());
-                query.setParameter("trangThaiDM", danhMuc.getTrangThai());
-                check = query.executeUpdate();
-                transaction.commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-                transaction.rollback();
-            }
-        } finally {
-            return check > 0;
-        }
-    }
-
     public static void main(String[] args) {
-        //thêm danh mục:
-//        DanhMuc danhMuc = new DanhMuc();
-//        danhMuc.setMaDanhMuc("DM1");
-//        danhMuc.setTenDanhMuc("Đồ uống");
-//        danhMuc.setTrangThai(0);
-//        System.out.println(new DanhMucRepository().addDanhMucHQL(danhMuc));
-//thêm danh mục
+        //DanhMuc danhMuc = new DanhMucRepository().getOne("DM1");
+        //System.out.println(danhMuc.toString());
         DanhMuc danhMuc = new DanhMuc();
-        danhMuc.setMaDanhMuc("DM1");
-        danhMuc.setTenDanhMuc("Đồ uống");
+        //  danhMuc.setMaDanhMuc("DM3");
+        danhMuc.setTenDanhMuc("Đồ ăn vặt");
         danhMuc.setTrangThai(0);
-        boolean add = new DanhMucRepository().add(danhMuc);
-        System.out.println(add);
+        System.out.println(new DanhMucRepository().update(danhMuc, "DM3"));
+        List<DanhMuc> listDM = new DanhMucRepository().getAll();
+        for (DanhMuc danhMuc1 : listDM) {
+            System.out.println(danhMuc1.toString());
+        }
     }
 }

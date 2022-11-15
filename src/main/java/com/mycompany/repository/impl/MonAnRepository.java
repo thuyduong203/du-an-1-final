@@ -106,7 +106,6 @@ public class MonAnRepository implements ICommonRepository<MonAn, Boolean, String
         MonAn monAn = new MonAn();
         monAn.setDonGia(BigDecimal.valueOf(200));
         monAn.setDonViTinh("suất");
-        monAn.setLoai(loaiMA);
         monAn.setMaMonAn("MA3");
         monAn.setTenMonAn("xyzzzzzz");
 //        monAn.setTrangThai(0);

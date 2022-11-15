@@ -40,7 +40,6 @@ public class ViewLogin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        lbHinhAnhThiaDia = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -65,9 +64,6 @@ public class ViewLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("PHẦN MỀM BÁN ĐỒ ĂN");
 
-        lbHinhAnhThiaDia.setIcon(new javax.swing.ImageIcon("C:\\Users\\Duongntt\\Desktop\\DuAn1Final\\Nhom102_TheGioiHau_DA1\\src\\main\\java\\com\\mycompany\\Icon\\thìa dĩa.png")); // NOI18N
-        lbHinhAnhThiaDia.setText("jLabel8");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -77,9 +73,7 @@ public class ViewLogin extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(63, 63, 63))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(lbHinhAnhThiaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(387, 387, 387)
                 .addComponent(jLabel7)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
@@ -88,9 +82,7 @@ public class ViewLogin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(47, 47, 47)
-                .addComponent(lbHinhAnhThiaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(508, 508, 508)
                 .addComponent(jLabel7)
                 .addContainerGap(548, Short.MAX_VALUE))
         );
@@ -282,7 +274,6 @@ public class ViewLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel lbHinhAnhThiaDia;
     private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

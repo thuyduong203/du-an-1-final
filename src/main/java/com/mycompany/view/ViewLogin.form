@@ -105,9 +105,7 @@
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="lbHinhAnhThiaDia" min="-2" pref="351" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="387" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="42" max="32767" attributes="0"/>
                   </Group>
@@ -118,9 +116,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="lbHinhAnhThiaDia" min="-2" pref="454" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="508" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="548" max="32767" attributes="0"/>
                   </Group>
@@ -140,14 +136,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
-            </Component>
-            <Component class="javax.swing.JLabel" name="lbHinhAnhThiaDia">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Duongntt\Desktop\DuAn1Final\Nhom102_TheGioiHau_DA1\src\main\java\com\mycompany\Icon\th&#xec;a d&#x129;a.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="jLabel8"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

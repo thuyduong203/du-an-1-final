@@ -65,7 +65,7 @@ public class ViewLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("PHẦN MỀM BÁN ĐỒ ĂN");
 
-        lbHinhAnhThiaDia.setIcon(new javax.swing.ImageIcon("C:\\Users\\Duongntt\\Documents\\Nhom102_TheGioiHau_DA1\\src\\main\\java\\com\\mycompany\\Icon\\thìa dĩa.png")); // NOI18N
+        lbHinhAnhThiaDia.setIcon(new javax.swing.ImageIcon("C:\\Users\\Duongntt\\Desktop\\DuAn1Final\\Nhom102_TheGioiHau_DA1\\src\\main\\java\\com\\mycompany\\Icon\\thìa dĩa.png")); // NOI18N
         lbHinhAnhThiaDia.setText("jLabel8");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

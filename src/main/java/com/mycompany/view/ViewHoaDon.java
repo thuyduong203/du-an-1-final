@@ -137,6 +137,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lbKhuVucThemHD = new javax.swing.JLabel();
+        btnLoad = new javax.swing.JButton();
         lbMaHD = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -332,6 +333,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("KHU VỰC:");
 
+        btnLoad.setText("Load");
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -343,9 +351,12 @@ public class ViewHoaDon extends javax.swing.JFrame {
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbbChonBan, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(cbbChonBan, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(btnLoad))
                     .addComponent(lbKhuVucThemHD, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +364,8 @@ public class ViewHoaDon extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(cbbChonBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbChonBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -681,9 +693,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
     }//GEN-LAST:event_tbHoaDonMouseClicked
 
     private void cbbChonBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbChonBanActionPerformed
-        int maBan = Integer.valueOf(cbbChonBan.getSelectedItem().toString());
-        Ban b = banService.getOne(String.valueOf(maBan));
-        lbKhuVucThemHD.setText(b.getKv().getTenKV());
+        if (cbbChonBan.getSelectedItem() != null) {
+            int maBan = Integer.valueOf(cbbChonBan.getSelectedItem().toString());
+            Ban b = banService.getOne(String.valueOf(maBan));
+            lbKhuVucThemHD.setText(b.getKv().getTenKV());
+        }
     }//GEN-LAST:event_cbbChonBanActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -740,6 +754,12 @@ public class ViewHoaDon extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+        cbbChonBan.removeAllItems();
+        listBan = banService.getAll();
+        loadCbb(listBan);
+    }//GEN-LAST:event_btnLoadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -849,6 +869,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private javax.swing.JButton btnHoaDon;
     private javax.swing.JButton btnKhachHang;
     private javax.swing.JButton btnKhuyenMai;
+    private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSanPham;
     private javax.swing.JButton btnSearch;

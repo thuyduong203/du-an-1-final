@@ -73,9 +73,9 @@ public class LoginUtil {
             return "lỗi không gửi được";
         }
     }
-    
+
     public static void main(String[] args) {
-       String s = new LoginUtil().checkMail("NV001");
+        String s = new LoginUtil().checkMail("NV001");
         System.out.println(s);
     }
 }

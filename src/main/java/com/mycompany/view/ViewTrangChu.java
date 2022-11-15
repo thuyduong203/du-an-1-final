@@ -1185,11 +1185,11 @@ public class ViewTrangChu extends javax.swing.JFrame {
             String maHD = hoaDonUtil.zenMaThuyDuong(listHD);
             String ngayTao = new HoaDonUtil().layNgay();
             String ngayThanhToan = new HoaDonUtil().layNgay();
-            NhanVien nhanVien = (NhanVien) nvs.getOne("NV02");
+//            NhanVien nhanVien = (NhanVien) nvs.getOne("NV02");
             Ban ban = (Ban) banService.getOne(lbSoBan.getText());
             ban.setTrangThai(1);
             String setTrangThaiBan = (String) banService.update(ban, ban.getMaBan().toString());
-            HoaDon hd = new HoaDon(null, maHD, nhanVien, null, ban, ngayTao, Date.valueOf(ngayThanhToan), null, null, 0);
+            HoaDon hd = new HoaDon(null, maHD, nhanV, null, ban, ngayTao, Date.valueOf(ngayThanhToan), null, null, 0);
             JOptionPane.showMessageDialog(this, hds.add(hd));
             lstHoaDonResponses = hoaDonResponseService.getAll();
             lstBanResponses = banResponseService.getAll();

@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewHoaDon extends javax.swing.JFrame {
-    
+
     private DefaultTableModel dtmHoaDon = new DefaultTableModel();
     private List<HoaDon> listHD = new ArrayList<>();
     private HoaDonService hoaDonService = new HoaDonService();
@@ -38,7 +38,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
     private HoaDonUtil hoaDonUtil = new HoaDonUtil();
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private NhanVienService nhanVienService = new NhanVienService();
-    
+
     public ViewHoaDon() {
         initComponents();
         //lấy ngày giờ hnay:
@@ -58,7 +58,7 @@ public class ViewHoaDon extends javax.swing.JFrame {
         loadCbb(listBan);
         lbNgayGio.setText(String.valueOf(today));
     }
-    
+
     private void showData(List<HoaDon> listHD) {
         if (listHD.size() > 0) {
             dtmHoaDon.setRowCount(0);
@@ -67,13 +67,13 @@ public class ViewHoaDon extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void loadCbb(List<Ban> listBan) {
         for (Ban ban : listBan) {
             dcbmChonBan.addElement(ban.getMaBan());
         }
     }
-    
+
     private void fillHD(int index, List<HoaDon> listHD) {
         HoaDon hoaDon = listHD.get(index);
         lbMaHD.setText(hoaDon.getMaHoaDon());
@@ -88,9 +88,9 @@ public class ViewHoaDon extends javax.swing.JFrame {
         lbKhuVuc.setText(hoaDon.getBan().getKv().getTenKV());
         txtBan.setText(String.valueOf(hoaDon.getBan().getMaBan()));
         txtNgayTao.setEnabled(false);
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -696,9 +696,11 @@ public class ViewHoaDon extends javax.swing.JFrame {
         hoaDon.setTrangThai(0);
         Ban ban = banService.getOne(cbbChonBan.getSelectedItem().toString());
         hoaDon.setBan(ban);
-        NhanVien nhanVien = nhanVienService.getOne("NV02");
+        NhanVien nhanVien = nhanVienService.getOne("NV01");
         hoaDon.setNhanVien(nhanVien);
         JOptionPane.showMessageDialog(this, hoaDonService.add(hoaDon));
+        ban.setTrangThai(1);
+        String updateban = banService.update(ban, String.valueOf(ban.getMaBan()));
         listHD = hoaDonService.getAll();
         showData(listHD);
     }//GEN-LAST:event_btnAddActionPerformed
@@ -729,6 +731,9 @@ public class ViewHoaDon extends javax.swing.JFrame {
             } else {
                 hoaDon.setGhiChu(txtGhiChu.getText());
                 hoaDon.setTrangThai(3);
+                Ban ban = hoaDon.getBan();
+                ban.setTrangThai(0);
+                String updateBan = banService.update(ban, String.valueOf(ban.getMaBan()));
                 JOptionPane.showMessageDialog(this, hoaDonService.update(hoaDon, hoaDon.getMaHoaDon()));
                 listHD = hoaDonService.getAll();
                 showData(listHD);

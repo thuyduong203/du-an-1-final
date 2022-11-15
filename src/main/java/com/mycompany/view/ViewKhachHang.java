@@ -8,7 +8,6 @@ import com.mycompany.domainModel.KhachHang;
 import com.mycompany.domainModel.NhanVien;
 import com.mycompany.service.impl.KhachHangService;
 import com.mycompany.util.KhachHangUtil;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +60,13 @@ public class ViewKhachHang extends javax.swing.JFrame {
         txtTenDem.setText(khachHang.getTenDem());
         txtThanhPho.setText(khachHang.getThanhPho());
         txtTrangThai.setText(String.valueOf(khachHang.getTrangThai()));
+        if (khachHang.getGioiTinh().equals("Nữ")) {
+            radioNu.setSelected(true);
+        } else if (khachHang.getGioiTinh().equals("Nam")) {
+            radioNam.setSelected(true);
+        } else {
+            radioKhongXacDinh.setSelected(true);
+        }
     }
 
     private KhachHang newKH() {
@@ -663,7 +669,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         txtMa.setText("");
-        txtMa.setEnabled(false);
+        txtMa.setEnabled(true);
         txtDiaChi.setText("");
         txtHo.setText("");
         txtQuocGia.setText("");
@@ -691,8 +697,8 @@ public class ViewKhachHang extends javax.swing.JFrame {
         if (index < 0) {
             JOptionPane.showMessageDialog(this, "Chọn data!");
         } else {
-            KhachHang khachHang = newKH();
-            JOptionPane.showMessageDialog(this, khachHangService.remove(txtMa.getText()));
+            String maKH = txtMa.getText();
+            JOptionPane.showMessageDialog(this, khachHangService.remove(maKH));
             listKH = khachHangService.getAll();
             showData(listKH, 1);
         }

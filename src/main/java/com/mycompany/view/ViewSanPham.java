@@ -146,14 +146,29 @@ public class ViewSanPham extends javax.swing.JFrame {
         btnTrangChu.setBackground(new java.awt.Color(204, 204, 204));
         btnTrangChu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTrangChu.setText("TRANG CHỦ");
+        btnTrangChu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrangChuActionPerformed(evt);
+            }
+        });
 
         btnHoaDon.setBackground(new java.awt.Color(204, 204, 204));
         btnHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHoaDon.setText("HÓA ĐƠN");
+        btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoaDonActionPerformed(evt);
+            }
+        });
 
         btnKhachHang.setBackground(new java.awt.Color(204, 204, 204));
         btnKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhachHang.setText("KHÁCH HÀNG");
+        btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhachHangActionPerformed(evt);
+            }
+        });
 
         btnBan.setBackground(new java.awt.Color(204, 204, 204));
         btnBan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -167,6 +182,11 @@ public class ViewSanPham extends javax.swing.JFrame {
         btnKhuyenMai.setBackground(new java.awt.Color(204, 204, 204));
         btnKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhuyenMai.setText("KHUYẾN MÃI");
+        btnKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhuyenMaiActionPerformed(evt);
+            }
+        });
 
         btnSanPham.setBackground(new java.awt.Color(255, 255, 153));
         btnSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -636,6 +656,34 @@ public class ViewSanPham extends javax.swing.JFrame {
         this.dispose();
         viewSanPham.setVisible(true);
     }//GEN-LAST:event_btnSanPhamActionPerformed
+
+    private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
+        // TODO add your handling code here:
+        ViewHoaDon viewHoaDon = new ViewHoaDon(nhanV);
+        this.dispose();
+        viewHoaDon.setVisible(true);
+    }//GEN-LAST:event_btnHoaDonActionPerformed
+
+    private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+        // TODO add your handling code here:
+        ViewKhachHang viewKhachHang = new ViewKhachHang(nhanV);
+        this.dispose();
+        viewKhachHang.setVisible(true);
+    }//GEN-LAST:event_btnKhachHangActionPerformed
+
+    private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
+        // TODO add your handling code here:
+        ViewKhuyenMai viewKhuyenMai = new ViewKhuyenMai(nhanV);
+        this.dispose();
+        viewKhuyenMai.setVisible(true);
+    }//GEN-LAST:event_btnKhuyenMaiActionPerformed
+
+    private void btnTrangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangChuActionPerformed
+        // TODO add your handling code here:
+        ViewTrangChu viewTrangChu = new ViewTrangChu(nhanV);
+        this.dispose();
+        viewTrangChu.setVisible(true);
+    }//GEN-LAST:event_btnTrangChuActionPerformed
 
     /**
      * @param args the command line arguments

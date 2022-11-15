@@ -302,6 +302,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="H&#xd3;A &#x110;&#x1a0;N"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHoaDonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnKhachHang">
               <Properties>
@@ -313,6 +316,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="KH&#xc1;CH H&#xc0;NG"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhachHangActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnBan">
               <Properties>

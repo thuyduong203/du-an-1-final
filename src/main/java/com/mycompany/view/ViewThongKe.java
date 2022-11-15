@@ -120,10 +120,20 @@ public class ViewThongKe extends javax.swing.JFrame {
         btnHoaDon.setBackground(new java.awt.Color(204, 204, 204));
         btnHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHoaDon.setText("HÓA ĐƠN");
+        btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoaDonActionPerformed(evt);
+            }
+        });
 
         btnKhachHang.setBackground(new java.awt.Color(204, 204, 204));
         btnKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhachHang.setText("KHÁCH HÀNG");
+        btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhachHangActionPerformed(evt);
+            }
+        });
 
         btnBan.setBackground(new java.awt.Color(204, 204, 204));
         btnBan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -413,7 +423,24 @@ public class ViewThongKe extends javax.swing.JFrame {
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
         // TODO add your handling code here:
+        ViewKhuyenMai viewKhuyenMai = new ViewKhuyenMai(nhanV);
+        this.dispose();
+        viewKhuyenMai.setVisible(true);
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
+
+    private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+        // TODO add your handling code here:
+        ViewKhachHang viewKhachHang = new ViewKhachHang(nhanV);
+        this.dispose();
+        viewKhachHang.setVisible(true);
+    }//GEN-LAST:event_btnKhachHangActionPerformed
+
+    private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
+        // TODO add your handling code here:
+        ViewHoaDon viewHoaDon = new ViewHoaDon(nhanV);
+        this.dispose();
+        viewHoaDon.setVisible(true);
+    }//GEN-LAST:event_btnHoaDonActionPerformed
 
     /**
      * @param args the command line arguments

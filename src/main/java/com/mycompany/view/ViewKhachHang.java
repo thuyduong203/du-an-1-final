@@ -5,6 +5,7 @@
 package com.mycompany.view;
 
 import com.mycompany.domainModel.KhachHang;
+import com.mycompany.domainModel.NhanVien;
 import com.mycompany.service.impl.KhachHangService;
 import com.mycompany.util.KhachHangUtil;
 import java.sql.Date;
@@ -19,15 +20,17 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewKhachHang extends javax.swing.JFrame {
-    
+
     private DefaultTableModel dtmKhachHang = new DefaultTableModel();
     private List<KhachHang> listKH = new ArrayList<>();
     private KhachHangService khachHangService = new KhachHangService();
     private KhachHangUtil khachHangUtil = new KhachHangUtil();
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    
-    public ViewKhachHang() {
+    private NhanVien nhanV;
+
+    public ViewKhachHang(NhanVien nhanV) {
         initComponents();
+        this.nhanV = nhanV;
         tbKhachHang.setModel(dtmKhachHang);
         String header[] = {"STT", "MÃ", "HỌ VÀ TÊN", "GIỚI TÍNH", "NGÀY SINH", "SDT", "ĐỊA CHỈ", "TRẠNG THÁI"};
         dtmKhachHang.setColumnIdentifiers(header);
@@ -37,7 +40,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
         java.util.Date today = new java.util.Date();
         dateNgaySinh.setDate(today);
     }
-    
+
     private void showData(List<KhachHang> listKH, int stt) {
         dtmKhachHang.setRowCount(0);
         for (KhachHang khachHang : listKH) {
@@ -45,7 +48,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
             stt++;
         }
     }
-    
+
     private void fill(int index, List<KhachHang> listKH) {
         KhachHang khachHang = listKH.get(index);
         txtMa.setText(khachHang.getMa());
@@ -59,7 +62,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
         txtThanhPho.setText(khachHang.getThanhPho());
         txtTrangThai.setText(String.valueOf(khachHang.getTrangThai()));
     }
-    
+
     private KhachHang newKH() {
         KhachHang khachHang = new KhachHang();
         listKH = khachHangService.getAll();
@@ -83,7 +86,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
         khachHang.setTrangThai(Integer.valueOf(txtTrangThai.getText()));
         return khachHang;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -205,30 +208,65 @@ public class ViewKhachHang extends javax.swing.JFrame {
         btnHoaDon.setBackground(new java.awt.Color(204, 204, 204));
         btnHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHoaDon.setText("HÓA ĐƠN");
+        btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoaDonActionPerformed(evt);
+            }
+        });
 
         btnKhachHang.setBackground(new java.awt.Color(255, 255, 153));
         btnKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhachHang.setText("KHÁCH HÀNG");
+        btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhachHangActionPerformed(evt);
+            }
+        });
 
         btnBan.setBackground(new java.awt.Color(204, 204, 204));
         btnBan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBan.setText("BÀN");
+        btnBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBanActionPerformed(evt);
+            }
+        });
 
         btnKhuyenMai.setBackground(new java.awt.Color(204, 204, 204));
         btnKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhuyenMai.setText("KHUYẾN MÃI");
+        btnKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhuyenMaiActionPerformed(evt);
+            }
+        });
 
         btnSanPham.setBackground(new java.awt.Color(204, 204, 204));
         btnSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSanPham.setText("SẢN PHẨM");
+        btnSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSanPhamActionPerformed(evt);
+            }
+        });
 
         btnThongKe.setBackground(new java.awt.Color(204, 204, 204));
         btnThongKe.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThongKe.setText("THỐNG KÊ");
+        btnThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeActionPerformed(evt);
+            }
+        });
 
         btnNhanVien.setBackground(new java.awt.Color(204, 204, 204));
         btnNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnNhanVien.setText("NHÂN VIÊN");
+        btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhanVienActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -606,6 +644,9 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     private void btnTrangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangChuActionPerformed
         // TODO add your handling code here:
+        ViewTrangChu viewTrangChu = new ViewTrangChu(nhanV);
+        this.dispose();
+        viewTrangChu.setVisible(true);
     }//GEN-LAST:event_btnTrangChuActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -657,6 +698,55 @@ public class ViewKhachHang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
+    private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
+        // TODO add your handling code here:
+        ViewNhanVien viewNhanVien = new ViewNhanVien(nhanV);
+        this.dispose();
+        viewNhanVien.setVisible(true);
+    }//GEN-LAST:event_btnNhanVienActionPerformed
+
+    private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
+        // TODO add your handling code here:
+        ViewHoaDon viewHoaDon = new ViewHoaDon(nhanV);
+        this.dispose();
+        viewHoaDon.setVisible(true);
+    }//GEN-LAST:event_btnHoaDonActionPerformed
+
+    private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+        // TODO add your handling code here:
+        ViewKhachHang viewKhachHang = new ViewKhachHang(nhanV);
+        this.dispose();
+        viewKhachHang.setVisible(true);
+    }//GEN-LAST:event_btnKhachHangActionPerformed
+
+    private void btnBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanActionPerformed
+        // TODO add your handling code here:
+        ViewBan viewBan = new ViewBan(nhanV);
+        this.dispose();
+        viewBan.setVisible(true);
+    }//GEN-LAST:event_btnBanActionPerformed
+
+    private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
+        // TODO add your handling code here:
+        ViewKhuyenMai viewKhuyenMai = new ViewKhuyenMai(nhanV);
+        this.dispose();
+        viewKhuyenMai.setVisible(true);
+    }//GEN-LAST:event_btnKhuyenMaiActionPerformed
+
+    private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
+        // TODO add your handling code here:
+        ViewSanPham viewSanPham = new ViewSanPham(nhanV);
+        this.dispose();
+        viewSanPham.setVisible(true);
+    }//GEN-LAST:event_btnSanPhamActionPerformed
+
+    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        // TODO add your handling code here:
+        ViewThongKe viewThongKe = new ViewThongKe(nhanV);
+        this.dispose();
+        viewThongKe.setVisible(true);
+    }//GEN-LAST:event_btnThongKeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -692,11 +782,11 @@ public class ViewKhachHang extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewKhachHang().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ViewKhachHang().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

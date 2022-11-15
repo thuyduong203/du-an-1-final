@@ -10,4 +10,7 @@ package com.mycompany.view;
  */
 public class NewClass {
     
+    
+    co su thay dois
+    
 }

@@ -11,6 +11,7 @@ import com.mycompany.service.ICommonService;
 import com.mycompany.service.INhanVienService;
 import com.mycompany.util.ThongBao;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,4 +77,10 @@ public class NhanVienService implements ICommonService<NhanVien, String>, INhanV
     public List<NhanVien> getMaLogin(String user) {
         return nvRepo.getMaLogin(user);
     }
+
+    @Override
+    public List<NhanVien> searchByNameAndMa(String name, String ma) {
+        return nvRepo.searchByNameAndMa(name, ma);
+    }
+
 }

@@ -72,7 +72,7 @@ public class NhanVienRepository implements ICommonRepository<NhanVien, Boolean, 
             try {
                 Query query = session.createQuery("UPDATE NhanVien SET chucVu = :chucVuNV,"
                         + " ho = :hoNV, tenDem = :tenDemNV, ten = :tenNV,"
-                        + "gioiTinh = :gioiTinhNV, soDienThoai = :sdtNV, ngaySinh = :ngaySinhNV,"
+                        + "gioiTinh = :gioiTinhNV, soDienThoai = :sdtNV, email = :Email , ngaySinh = :ngaySinhNV,"
                         + "diaChi = :diaChiNV, matKhau = :matKhauNV, trangThai = :trangThaiNV"
                         + " WHERE ma = :maNV");
                 query.setParameter("chucVuNV", nv.getChucVu());
@@ -81,6 +81,7 @@ public class NhanVienRepository implements ICommonRepository<NhanVien, Boolean, 
                 query.setParameter("tenNV", nv.getTen());
                 query.setParameter("gioiTinhNV", nv.getGioiTinh());
                 query.setParameter("sdtNV", nv.getSoDienThoai());
+                query.setParameter("Email", nv.getEmail());
                 query.setParameter("ngaySinhNV", nv.getNgaySinh());
                 query.setParameter("diaChiNV", nv.getDiaChi());
                 query.setParameter("matKhauNV", nv.getMatKhau());
@@ -136,6 +137,18 @@ public class NhanVienRepository implements ICommonRepository<NhanVien, Boolean, 
             List<NhanVien> nv = query.getResultList();
             return nv;
         }
+    }
+
+    @Override
+    public List<NhanVien> searchByNameAndMa(String name, String ma) {
+        List<NhanVien> lisstNV = new ArrayList<>();
+        try ( Session session = HibernateUtil.getFactory().openSession()) {
+            Query query = session.createQuery("FROM NhanVien WHERE ma = :Ma OR ten = :Ten");
+            query.setParameter("Ma", ma);
+            query.setParameter("Ten", name);
+            lisstNV = query.getResultList();
+        }
+        return lisstNV;
     }
 
 }

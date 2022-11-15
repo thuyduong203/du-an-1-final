@@ -223,6 +223,9 @@ public class ViewLogin extends javax.swing.JFrame {
 
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
         // TODO add your handling code here:
+        JDialogQuenMatKhau jDialogQuenMatKhau = new JDialogQuenMatKhau(this, rootPaneCheckingEnabled);
+        this.dispose();
+        jDialogQuenMatKhau.setVisible(true);
     }//GEN-LAST:event_btnDoiMKActionPerformed
 
     /**

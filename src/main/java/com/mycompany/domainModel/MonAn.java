@@ -36,12 +36,12 @@ public class MonAn {
 
     @ManyToOne
     @JoinColumn(name = "IdLoai", nullable = false)
-    private DanhMuc loai;
+    private Loai loai;
 
     @ManyToOne
-    @JoinColumn(name = "IdKM",nullable = true)
+    @JoinColumn(name = "IdKM", nullable = true)
     private KhuyenMai khuyenMai;
-    
+
     @Column(name = "MaMonAn", nullable = false)
     private String maMonAn;
 

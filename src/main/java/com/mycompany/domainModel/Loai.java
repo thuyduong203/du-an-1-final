@@ -23,12 +23,11 @@ import org.hibernate.annotations.GenericGenerator;
  * @author son45
  */
 @Entity
-@Table(name = "Khuyen_Mai")
+@Table(name = "Loai")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Loai {
 
     @Id
@@ -50,4 +49,8 @@ public class Loai {
     @Column(name = "TrangThai", nullable = true)
     private int trangThai;
 
+    @Override
+    public String toString() {
+        return "Loai{" + "idLoai=" + idLoai + ", maLoai=" + maLoai + ", tenLoai=" + tenLoai + ", trangThai=" + trangThai + '}';
+    }    
 }

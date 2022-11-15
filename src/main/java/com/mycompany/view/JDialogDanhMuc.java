@@ -15,7 +15,7 @@ public class JDialogDanhMuc extends javax.swing.JDialog {
      */
     public JDialogDanhMuc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+        initComponents();   
     }
 
     /**

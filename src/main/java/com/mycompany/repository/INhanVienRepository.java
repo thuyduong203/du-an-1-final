@@ -14,4 +14,6 @@ import java.util.List;
 public interface INhanVienRepository {
 
     List<NhanVien> getUserAndPass(String user, String pass);
+
+    List<NhanVien> getMaLogin(String user);
 }

@@ -71,4 +71,9 @@ public class NhanVienService implements ICommonService<NhanVien, String>, INhanV
     public List<NhanVien> getUserAndPass(String user, String pass) {
         return nvRepo.getUserAndPass(user, pass);
     }
+
+    @Override
+    public List<NhanVien> getMaLogin(String user) {
+        return nvRepo.getMaLogin(user);
+    }
 }

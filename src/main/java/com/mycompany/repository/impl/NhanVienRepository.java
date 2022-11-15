@@ -127,4 +127,15 @@ public class NhanVienRepository implements ICommonRepository<NhanVien, Boolean, 
             return nv;
         }
     }
+
+    @Override
+    public List<NhanVien> getMaLogin(String user) {
+        try ( Session session = HibernateUtil.getFactory().openSession()) {
+            Query query = session.createQuery("FROM NhanVien WHERE ma = :maNV");
+            query.setParameter("maNV", user);
+            List<NhanVien> nv = query.getResultList();
+            return nv;
+        }
+    }
+
 }

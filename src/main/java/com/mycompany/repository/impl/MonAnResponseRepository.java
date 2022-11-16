@@ -18,11 +18,11 @@ import org.hibernate.Session;
 public class MonAnResponseRepository implements ICommonResponseRepository<MonAnResponse> {
 
     private static final Session session = HibernateUtil.getFactory().openSession();
-    private String fromTable = " FROM MonAn MA WHERE trangThai = 1";
+    private String fromTable = " FROM MonAn MA WHERE trangThai = 0";
 
     @Override
     public List<MonAnResponse> getAll() {
-        String hql = "SELECT new com.mycompany.customModel.MonAnResponse(MA.maMonAn,MA.tenMonAn,MA.donGia,MA.donViTinh,MA.loai.tenDanhMuc)" + fromTable;
+        String hql = "SELECT new com.mycompany.customModel.MonAnResponse(MA.maMonAn,MA.tenMonAn,MA.donGia,MA.donViTinh,MA.loai.tenLoai)" + fromTable;
         Query query = session.createQuery(hql);
         List<MonAnResponse> monAnResponses = query.getResultList();
         return monAnResponses;

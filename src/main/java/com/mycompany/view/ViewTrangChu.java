@@ -21,6 +21,7 @@ import com.mycompany.service.ICommonResponseService;
 import com.mycompany.service.ICommonService;
 import com.mycompany.service.IHoaDonChiTiet;
 import com.mycompany.service.IHoaDonChiTietResponseService;
+import com.mycompany.service.IcommonHoaDonResponseService;
 import com.mycompany.service.impl.BanResponseService;
 import com.mycompany.service.impl.BanService;
 import com.mycompany.service.impl.ComBoService;
@@ -60,7 +61,7 @@ public class ViewTrangChu extends javax.swing.JFrame {
     private List<ComboResponse> lstComboResponses = new ArrayList<>();
     private ICommonResponseService monAnResponseService = new MonAnResponseService();
     private ICommonResponseService banResponseService = new BanResponseService();
-    private ICommonResponseService hoaDonResponseService = new HoaDonResponseService();
+    private IcommonHoaDonResponseService hoaDonResponseService = new HoaDonResponseService();
     private ICommonResponseService comboResponseService = new ComboResponseService();
     private ICommonService hds = new HoaDonService();
     private ICommonService mas = new MonAnService();
@@ -74,6 +75,7 @@ public class ViewTrangChu extends javax.swing.JFrame {
     private int checkTrangThaiHD;
     private int checkTaoHD = 1;
     private int checkMonAn = 1;
+    private int checkRdo = 0;
     private int checkBtnMonAn = 1;
     private List<HoaDon> listHD = new ArrayList<>();
     private HoaDonService hoaDonService = new HoaDonService();
@@ -100,6 +102,7 @@ public class ViewTrangChu extends javax.swing.JFrame {
         lstBanResponses = banResponseService.getAll();
         lstHoaDonResponses = hoaDonResponseService.getAll();
         lstMonAnResponses = monAnResponseService.getAll();
+        radioTatCa.setSelected(true);
         showDataMonAn(lstMonAnResponses);
         showDataBan(lstBanResponses);
         showDataHoaDon(lstHoaDonResponses);
@@ -875,15 +878,35 @@ public class ViewTrangChu extends javax.swing.JFrame {
 
         radioTrangThaiHD.add(radioTatCa);
         radioTatCa.setText("Tất cả");
+        radioTatCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioTatCaActionPerformed(evt);
+            }
+        });
 
         radioTrangThaiHD.add(radioChoThanhToan);
         radioChoThanhToan.setText("Chờ thanh toán");
+        radioChoThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioChoThanhToanActionPerformed(evt);
+            }
+        });
 
         radioTrangThaiHD.add(raidoDaThanhToan);
         raidoDaThanhToan.setText("Đã thanh toán");
+        raidoDaThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                raidoDaThanhToanActionPerformed(evt);
+            }
+        });
 
         radioTrangThaiHD.add(radioDaHuy);
         radioDaHuy.setText("Đã huỷ");
+        radioDaHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioDaHuyActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1150,7 +1173,7 @@ public class ViewTrangChu extends javax.swing.JFrame {
             String ngayThanhToan = new HoaDonUtil().layNgay();
             Ban ban = (Ban) banService.getOne(lbSoBan.getText());
             ban.setTrangThai(0);
-            NhanVien nv = (NhanVien) nvs.getOne("NV02");
+            NhanVien nv = (NhanVien) nvs.getOne(lbNhanVien.getText());
             HoaDon hd = (HoaDon) hds.getOne(lbMaHDThanhToan.getText());
             hd.setTrangThai(1);
             hd.setBan(ban);
@@ -1189,9 +1212,20 @@ public class ViewTrangChu extends javax.swing.JFrame {
                 String addHD = (String) hds.update(hd, lbMaHDThanhToan.getText());
                 String setTrangThaiBan = (String) banService.update(ban, ban.getMaBan().toString());
                 JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-                lstHoaDonResponses = hoaDonResponseService.getAll();
+                if (checkRdo == 0) {
+                    lstHoaDonResponses = hoaDonResponseService.getAll();
+                    showDataHoaDon(lstHoaDonResponses);
+                } else if (checkRdo == 1) {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(0);
+                    showDataHoaDon(lstHoaDonResponses);
+                } else if (checkRdo == 2) {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(1);
+                    showDataHoaDon(lstHoaDonResponses);
+                } else {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(2);
+                    showDataHoaDon(lstHoaDonResponses);
+                }
                 lstBanResponses = banResponseService.getAll();
-                showDataHoaDon(lstHoaDonResponses);
                 showDataBan(lstBanResponses);
             }
 
@@ -1209,14 +1243,29 @@ public class ViewTrangChu extends javax.swing.JFrame {
             String ngayThanhToan = new HoaDonUtil().layNgay();
 //            NhanVien nhanVien = (NhanVien) nvs.getOne("NV02");
             Ban ban = (Ban) banService.getOne(lbSoBan.getText());
-            ban.setTrangThai(1);
-            String setTrangThaiBan = (String) banService.update(ban, ban.getMaBan().toString());
-            HoaDon hd = new HoaDon(null, maHD, nhanV, null, ban, ngayTao, Date.valueOf(ngayThanhToan), null, null, 0);
-            JOptionPane.showMessageDialog(this, hds.add(hd));
-            lstHoaDonResponses = hoaDonResponseService.getAll();
-            lstBanResponses = banResponseService.getAll();
-            showDataHoaDon(lstHoaDonResponses);
-            showDataBan(lstBanResponses);
+            if (ban.getTrangThai() == 1) {
+                JOptionPane.showMessageDialog(this, "Bàn đang có khách");
+            } else {
+                ban.setTrangThai(1);
+                String setTrangThaiBan = (String) banService.update(ban, ban.getMaBan().toString());
+                HoaDon hd = new HoaDon(null, maHD, nhanV, null, ban, ngayTao, Date.valueOf(ngayThanhToan), null, null, 0);
+                JOptionPane.showMessageDialog(this, hds.add(hd));
+                if (checkRdo == 0) {
+                    lstHoaDonResponses = hoaDonResponseService.getAll();
+                    showDataHoaDon(lstHoaDonResponses);
+                } else if (checkRdo == 1) {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(0);
+                    showDataHoaDon(lstHoaDonResponses);
+                } else if (checkRdo == 2) {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(1);
+                    showDataHoaDon(lstHoaDonResponses);
+                } else {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(2);
+                    showDataHoaDon(lstHoaDonResponses);
+                }
+                lstBanResponses = banResponseService.getAll();
+                showDataBan(lstBanResponses);
+            }
         }
     }//GEN-LAST:event_btnTaoHDActionPerformed
 
@@ -1333,6 +1382,34 @@ public class ViewTrangChu extends javax.swing.JFrame {
         this.dispose();
         viewKhuyenMai.setVisible(true);
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
+
+    private void radioTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioTatCaActionPerformed
+        // TODO add your handling code here:
+        checkRdo = 0;
+        lstHoaDonResponses = hoaDonResponseService.getAll();
+        showDataHoaDon(lstHoaDonResponses);
+    }//GEN-LAST:event_radioTatCaActionPerformed
+
+    private void radioChoThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioChoThanhToanActionPerformed
+        // TODO add your handling code here:
+        checkRdo = 1;
+        lstHoaDonResponses = hoaDonResponseService.getByTrangThai(0);
+        showDataHoaDon(lstHoaDonResponses);
+    }//GEN-LAST:event_radioChoThanhToanActionPerformed
+
+    private void raidoDaThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raidoDaThanhToanActionPerformed
+        // TODO add your handling code here:
+        checkRdo = 2;
+        lstHoaDonResponses = hoaDonResponseService.getByTrangThai(1);
+        showDataHoaDon(lstHoaDonResponses);
+    }//GEN-LAST:event_raidoDaThanhToanActionPerformed
+
+    private void radioDaHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioDaHuyActionPerformed
+        // TODO add your handling code here:
+        checkRdo = 3;
+        lstHoaDonResponses = hoaDonResponseService.getByTrangThai(2);
+        showDataHoaDon(lstHoaDonResponses);
+    }//GEN-LAST:event_radioDaHuyActionPerformed
 
     /**
      * @param args the command line arguments

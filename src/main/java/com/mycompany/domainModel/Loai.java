@@ -28,6 +28,7 @@ import org.hibernate.annotations.GenericGenerator;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Loai {
 
     @Id
@@ -49,8 +50,8 @@ public class Loai {
     @Column(name = "TrangThai", nullable = true)
     private int trangThai;
 
-    @Override
-    public String toString() {
-        return "Loai{" + "idLoai=" + idLoai + ", maLoai=" + maLoai + ", tenLoai=" + tenLoai + ", trangThai=" + trangThai + '}';
-    }    
+//    @Override
+//    public String toString() {
+//        return "Loai{" + "idLoai=" + idLoai + ", maLoai=" + maLoai + ", tenLoai=" + tenLoai + ", trangThai=" + trangThai + '}';
+//    }
 }

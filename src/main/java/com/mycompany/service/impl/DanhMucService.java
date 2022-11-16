@@ -39,7 +39,7 @@ public class DanhMucService implements ICommonService<DanhMuc, String> {
 
     @Override
     public String update(DanhMuc kh, String ma) {
-        if ((Boolean) dmr.update(kh,ma)) {
+        if ((Boolean) dmr.update(kh, ma)) {
             return "Sửa thành công";
         } else {
             return "Sửa thất bại";
@@ -54,6 +54,7 @@ public class DanhMucService implements ICommonService<DanhMuc, String> {
             return "Xoá thất bại";
         }
     }
+
     public static void main(String[] args) {
 //        DanhMuc loai = new DanhMuc();
 //        loai.setIdDanhMuc("AA5EF128-4354-4917-9C5D-9E19B52F1C3F");

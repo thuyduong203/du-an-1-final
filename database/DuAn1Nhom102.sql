@@ -205,57 +205,63 @@ SELECT * FROM Khach_Hang
 SELECT * FROM Khuyen_Mai
 --khu vực
 INSERT INTO Khu_Vuc(MaKhuVuc, TenKhuVuc, TrangThai) VALUES
-	('KV1', N'Tầng 1', 0)
+	('KV1', N'Trên cây', 0),
+	('KV2', N'Ngoài sân', 0)
 --bàn
 INSERT INTO Ban (IdKhuVuc, MaBan, SoLuongChoNgoi,TrangThai) VALUES
-	('8E6A751F-5C35-42DB-9707-D389ED2ED338', 1, 10, 0)
+	('B09E19A3-FA54-4756-AF8E-C69AEEE5F4AC', 1, 10, 0)
 INSERT INTO Ban (IdKhuVuc, MaBan, SoLuongChoNgoi,TrangThai) VALUES
-	('8E6A751F-5C35-42DB-9707-D389ED2ED338', 2, 5, 0)
+	('B99395AC-17BE-4415-B4CC-571682AAC82E', 2, 5, 0),
+	('B99395AC-17BE-4415-B4CC-571682AAC82E', 3, 5, 0)
 --chức vụ
 INSERT INTO Chuc_Vu (MaCV,TenCV,  TrangThai) VALUES
-	('CV1', N'Nhân Viên', 0)
+	('CV1', N'Nhân Viên', 0),
+	('CV2', N'Quản lý', 0)
 --nhân viên
 INSERT INTO Nhan_Vien(IdCV, MaNV, Ho, TenDem,Ten,GioiTinh, Sdt,Email, NgaySinh, DiaChi, MatKhau, TrangThai) VALUES
-	('AE0B9591-B997-4FD5-BE60-BF6BA9391695','NV1', N'Nguyễn', N'Thuỳ', N'Dương', N'Nữ', '0384910040',
-	'duongnttph25958@fpt.edu.vn', '2003-11-29', N'Tuyên Quang', '12123', 0)
+	('1F4936B3-1B57-46BE-8E39-6A071911D132','NV1', N'Nguyễn', N'Đức', N'Dụng', N'Nam', '0339927992',
+	'dungndph20697@fpt.edu.vn', '2003-04-22', N'Bắc Ninh', '123', 0)
 --danh mục:
 INSERT INTO Danh_Muc (MaDanhMuc,TenDanhMuc,TrangThai) VALUES
 	('DM1',N'Đồ ăn', 0)
 INSERT INTO Danh_Muc (MaDanhMuc,TenDanhMuc,TrangThai) VALUES
 	('DM2',N'Đồ uống', 0)
 --loại:
+select * from Loai
 INSERT INTO Loai (IdDanhMuc, MaLoai, TenLoai, TrangThai) VALUES
-	('BA987442-27D9-4076-B86A-6DD10E377CCE', 'L1', N'Nướng',0)
+	('790670C9-179E-46D1-B400-29F4B39A3C92', 'L1', N'Nướng',0)
 INSERT INTO Loai (IdDanhMuc, MaLoai, TenLoai, TrangThai) VALUES
-	('BA987442-27D9-4076-B86A-6DD10E377CCE', 'L2', N'Hấp',0)
+	('790670C9-179E-46D1-B400-29F4B39A3C92', 'L2', N'Hấp',0)
 INSERT INTO Loai (IdDanhMuc, MaLoai, TenLoai, TrangThai) VALUES
-	('88FDAC67-C940-4C6D-B21B-B24ECAC2E065', 'L3', N'Đồ uống có ga',0)
+	('9DE7FEF3-0843-4075-8E19-D9F1079B3977', 'L3', N'Đồ uống có ga',0)
 INSERT INTO Loai (IdDanhMuc, MaLoai, TenLoai, TrangThai) VALUES
-	('88FDAC67-C940-4C6D-B21B-B24ECAC2E065', 'L4', N'Đồ uống ko ga',0)
+	('9DE7FEF3-0843-4075-8E19-D9F1079B3977', 'L4', N'Đồ uống ko ga',0)
 --món ăn
 INSERT INTO Mon_An(IdLoai, MaMonAn, TenMonAn, DonGia, DonViTinh, TrangThai) VALUES
-	('D67EF4A8-AE09-4054-B9EB-A06F6CA0021C', 'MA1', N'Hàu nướng',200, N'Đĩa', 0)
+	('41B64B29-D8C8-4DC2-82C7-A5D73B5BB999', 'MA1', N'Hàu nướng',200, N'Đĩa', 0)
 INSERT INTO Mon_An(IdLoai, MaMonAn, TenMonAn, DonGia, DonViTinh, TrangThai) VALUES
-	('B64E93C8-B82F-469C-9DB3-F65218D6C83C', 'MA2', N'Hàu hấp',250, N'Đĩa', 0)
+	('D44A5328-D6DB-4B5E-AF88-1D6F655062FC', 'MA2', N'Hàu hấp',250, N'Đĩa', 0)
 INSERT INTO Mon_An(IdLoai, MaMonAn, TenMonAn, DonGia, DonViTinh, TrangThai) VALUES
-	('756B26C7-153F-479B-975A-B1C3336ADEF2', 'MA3', N'pepsi',10, N'chai', 0)
+	('C04BE5DC-7686-4405-941F-289A5EC6B8E7', 'MA3', N'pepsi',10, N'chai', 0)
 INSERT INTO Mon_An(IdLoai, MaMonAn, TenMonAn, DonGia, DonViTinh, TrangThai) VALUES
-	('B64E93C8-B82F-469C-9DB3-F65218D6C83C', 'MA4', N'lavie',5, N'chai', 0)
+	('CF246066-2D74-45BD-A1F8-98AA933F51EE', 'MA4', N'lavie',5, N'chai', 0)
+	select * from Mon_An
 --combo
 INSERT INTO Combo(IdNV, MaCB, TenCB, DonGia, TrangThai) VALUES
-	('B37F3855-A833-4DF5-9963-BECA36F261E0','CB1', N'Combo 255k', 255, 0 )
+	('D4200291-66C8-4869-9820-F50408C885BD','CB1', N'Combo 255k', 255, 0 )
 INSERT INTO Combo(IdNV, MaCB, TenCB, DonGia, TrangThai) VALUES
-	('B37F3855-A833-4DF5-9963-BECA36F261E0','CB2', N'Combo 215k', 215, 0 )
+	('D4200291-66C8-4869-9820-F50408C885BD','CB2', N'Combo 215k', 215, 0 )
 --chi tiết combo
 INSERT INTO Chi_Tiet_Combo (IdCombo,IdMonAn, SoLuongMonAn) VALUES
-	('D438E053-B628-4C6D-A35A-7C4F35BD4FC7','DC90E49C-8A95-4C58-BD2A-BE3E40D4FE64', 1)
+	('AACBB9C5-3D96-4CCC-9EC9-70B70B25F97D','DC3BF662-6915-43C4-9F13-4629BCF10F7E', 1)
 INSERT INTO Chi_Tiet_Combo (IdCombo,IdMonAn, SoLuongMonAn) VALUES
-	('D438E053-B628-4C6D-A35A-7C4F35BD4FC7','F3961D39-76FB-41E7-B3E2-875874D1BC75', 2)
+	('AACBB9C5-3D96-4CCC-9EC9-70B70B25F97D','DEFD2FE2-DDB3-4C6A-B45F-8A2637EB3121', 2)
 INSERT INTO Chi_Tiet_Combo (IdCombo,IdMonAn, SoLuongMonAn) VALUES
-	('9057052C-B134-4B31-AC41-79C7EAFE4389','748AE5E0-D92B-4276-A87E-090FF6F7D741', 1)
+	('4C09C663-EEDE-46DE-A053-B09074074D66','78D3188F-F52B-4AC8-A05F-4D0D39E728A2', 1)
 INSERT INTO Chi_Tiet_Combo (IdCombo,IdMonAn, SoLuongMonAn) VALUES
-	('9057052C-B134-4B31-AC41-79C7EAFE4389','F3961D39-76FB-41E7-B3E2-875874D1BC75', 2)
+	('4C09C663-EEDE-46DE-A053-B09074074D66','56ABB956-3D4F-4788-AD17-3D010EABBEF5', 2)
 --Khach hàng
+
 INSERT INTO Khach_Hang (MaKH, Ho, TenDem, Ten, GioiTinh, NgaySinh, Sdt, DiaChi, ThanhPho,QuocGia, TrangThai) VALUES
 	('KH1', N'Nguyễn', N'Anh', N'Dũng', N'Nam', '2003-11-29', '0384910040', N'Tuyên Quang', N'Tuyên Quang',
 		N'Việt Nam', 0)

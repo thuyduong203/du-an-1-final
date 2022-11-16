@@ -1199,11 +1199,19 @@ public class ViewTrangChu extends javax.swing.JFrame {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
+        String tienMat = txtTienMat.getText();
+        String chuyenKhoan = txtChuyenKhoan.getText();
+        if ("".equals(tienMat)) {
+            tienMat = "0";
+        }
+        if ("".equals(chuyenKhoan)) {
+            chuyenKhoan = "0";
+        }
         if ("".equals(lbMaHDThanhToan.getText())) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hoá đơn chưa thanh toán");
         } else if (cbChuyenKhoan.isSelected() == false && cbTienMat.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hình thức thanh toán");
-        } else if (Double.valueOf(txtTongTien.getText()) > (Double.valueOf(txtTienMat.getText()) + Double.valueOf(txtChuyenKhoan.getText()))) {
+        } else if (Double.valueOf(txtTongTien.getText()) > (Double.valueOf(tienMat) + Double.valueOf(chuyenKhoan))) {
             JOptionPane.showMessageDialog(this, "Chưa đủ tiền");
         } else {
             String hinhThucThanhToan = "";

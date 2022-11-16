@@ -51,14 +51,14 @@ public class KhuyenMai {
 
     @Column(name = "ThoiGianBD", nullable = false)
     private Date thoiGianBD;
-    
+
     @Column(name = "ThoiGianKT", nullable = false)
     private Date thoiGianKT;
 
     @Column(name = "LoaiKM", nullable = false)
     private String loaiKhuyenMai;
-    
-    @Column(name = "GtriKM",nullable = false)
+
+    @Column(name = "GtriKM", nullable = false)
     private BigDecimal giaTriKM;
 
     @Column(name = "GhiChu")
@@ -67,8 +67,8 @@ public class KhuyenMai {
     @Column(name = "TrangThai")
     private Integer trangThai;
 
-    public Object[] toDataRow() {
-        return new Object[]{};
+    public Object[] toDataRowViewKM(int stt) {
+        return new Object[]{stt, maKhuyenMai, tenKhuyenMai, (trangThai == 0 ? "Đang áp dụng" : "Ngừng áp dụng")};
     }
 
 }

@@ -52,6 +52,7 @@ public class ViewTrangChu extends javax.swing.JFrame {
     private DefaultTableModel dtmBan = new DefaultTableModel();
     private DefaultTableModel dtmMonAn = new DefaultTableModel();
     private DefaultTableModel dtmCombo = new DefaultTableModel();
+    private DefaultTableModel dtmDoUong = new DefaultTableModel();
     private List<MonAnResponse> lstMonAnResponses = new ArrayList<>();
     private List<BanResponse> lstBanResponses = new ArrayList<>();
     private List<HoaDonResponse> lstHoaDonResponses = new ArrayList<>();
@@ -141,6 +142,12 @@ public class ViewTrangChu extends javax.swing.JFrame {
         String headerMonAn[] = {"STT", "Loại món ăn", "Mã món ăn", "Tên món ăn", "Đơn giá", "Đơn vị tính"};
         tbMonAn.setModel(dtmMonAn);
         dtmMonAn.setColumnIdentifiers(headerMonAn);
+    }
+
+    private void loadTableDoUong() {
+        String headersDoUong[] = {"STT", "Loại đồ uống", "Mã đồ uống", "Tên đồ uống", "Đơn giá", "Đơn vị tính"};
+        tbMonAn.setModel(dtmDoUong);
+        dtmDoUong.setColumnIdentifiers(headersDoUong);
     }
 
     private void showDataMonAn(List<MonAnResponse> monAnResponses) {
@@ -1218,6 +1225,7 @@ public class ViewTrangChu extends javax.swing.JFrame {
         btnDoAn.setBackground(Color.WHITE);
         btnDoUong.setBackground(Color.GRAY);
         btnCombo.setBackground(Color.WHITE);
+        loadTableDoUong();
 
     }//GEN-LAST:event_btnDoUongActionPerformed
 

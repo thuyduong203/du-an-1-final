@@ -8,7 +8,6 @@ import com.mycompany.domainModel.ChucVu;
 import com.mycompany.domainModel.NhanVien;
 import com.mycompany.service.impl.ChucVuService;
 import com.mycompany.service.impl.NhanVienService;
-import java.sql.Array;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.dialect.SAPDBDialect;
 
 /**
  *

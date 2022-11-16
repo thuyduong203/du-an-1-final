@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,6 +36,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
 //    private KhuyenMaiChiTietService khuyenMaiChiTietService = new KhuyenMaiChiTietService();
     // private DefaultComboBoxModel
     private NhanVien nhanV;
+    private java.util.Date today = new java.util.Date();
 
     public ViewKhuyenMai(NhanVien nhanV) {
         initComponents();
@@ -46,7 +48,7 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         showData(listKM, 1);
         radioDangApDung.setSelected(true);
         cbbLoaiKM.setModel(dcbmLoaiKM);
-        java.util.Date today = new java.util.Date();
+
     }
 
     private void showData(List<KhuyenMai> listKM, int stt) {
@@ -369,12 +371,32 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         jLabel14.setText("Ghi chú:");
 
         btnAddKhuyenMai.setText("Add");
+        btnAddKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddKhuyenMaiActionPerformed(evt);
+            }
+        });
 
         btnUpdateKhuyenMai.setText("Update");
+        btnUpdateKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateKhuyenMaiActionPerformed(evt);
+            }
+        });
 
         btnRemoveKhuyenMai.setText("Remove");
+        btnRemoveKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveKhuyenMaiActionPerformed(evt);
+            }
+        });
 
         btnClearKhuyenMai.setText("Clear");
+        btnClearKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearKhuyenMaiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -579,6 +601,46 @@ public class ViewKhuyenMai extends javax.swing.JFrame {
         int index = tbKhuyenMai.getSelectedRow();
         fillKM(index, listKM);
     }//GEN-LAST:event_tbKhuyenMaiMouseClicked
+
+    private void btnAddKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddKhuyenMaiActionPerformed
+        KhuyenMai khuyenMai = newKM();
+        JOptionPane.showMessageDialog(this, khuyenMaiService.add(khuyenMai));
+        listKM = khuyenMaiService.getAll();
+        showData(listKM, 1);
+    }//GEN-LAST:event_btnAddKhuyenMaiActionPerformed
+
+    private void btnUpdateKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateKhuyenMaiActionPerformed
+        int index = tbKhuyenMai.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Chọn data!");
+        } else {
+            KhuyenMai khuyenMai = newKM();
+            JOptionPane.showMessageDialog(this, khuyenMaiService.update(khuyenMai, txtMaKM.getText()));
+            listKM = khuyenMaiService.getAll();
+            showData(listKM, WIDTH);
+        }
+    }//GEN-LAST:event_btnUpdateKhuyenMaiActionPerformed
+
+    private void btnClearKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearKhuyenMaiActionPerformed
+        txTenKhuyenMai.setText("");
+        txtDonVi.setText("");
+        dcbmLoaiKM.setSelectedItem("Phần trăm");
+        txtThoiGianBatDau.setDate(Date.valueOf(dateFormat.format(today)));
+        txtThoiGianKetThuc.setDate(Date.valueOf(dateFormat.format(today)));
+        txtMaKM.setText("");
+        txtMaKM.setEnabled(true);
+    }//GEN-LAST:event_btnClearKhuyenMaiActionPerformed
+
+    private void btnRemoveKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveKhuyenMaiActionPerformed
+        int index = tbKhuyenMai.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Chọn data!");
+        } else {
+            JOptionPane.showMessageDialog(this, khuyenMaiService.remove(txtMaKM.getText()));
+            listKM = khuyenMaiService.getAll();
+            showData(listKM, 1);
+        }
+    }//GEN-LAST:event_btnRemoveKhuyenMaiActionPerformed
 
     /**
      * @param args the command line arguments

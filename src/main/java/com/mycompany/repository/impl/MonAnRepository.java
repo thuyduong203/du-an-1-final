@@ -5,10 +5,12 @@
 package com.mycompany.repository.impl;
 
 import com.mycompany.domainModel.DanhMuc;
+import com.mycompany.domainModel.Loai;
 import com.mycompany.domainModel.MonAn;
 import com.mycompany.hibernateUtil.HibernateUtil;
 import com.mycompany.repository.ICommonRepository;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -100,16 +102,33 @@ public class MonAnRepository implements ICommonRepository<MonAn, Boolean, String
         return check > 0;
     }
 
+    public List<MonAn> getMonAnByDanhMuc(DanhMuc danhMuc) {
+        List<MonAn> listMA = new ArrayList<>();
+        try ( Session session = HibernateUtil.getFactory().openSession()) {
+            Query query = session.createQuery("FROM MonAn WHERE loai.danhMuc = :danhMuc");
+            query.setParameter("danhMuc", danhMuc);
+            listMA = query.getResultList();
+        } finally {
+            return listMA;
+        }
+    }
+
     public static void main(String[] args) {
-        DanhMuc loaiMA = new DanhMuc();
-        loaiMA.setIdDanhMuc("57109CB2-7DA5-4245-A24C-5EF2BAD02EA3");
-        MonAn monAn = new MonAn();
-        monAn.setDonGia(BigDecimal.valueOf(200));
-        monAn.setDonViTinh("suất");
-        monAn.setMaMonAn("MA3");
-        monAn.setTenMonAn("xyzzzzzz");
-//        monAn.setTrangThai(0);
-        boolean add = new MonAnRepository().remove("MA3");
-        System.out.println(add);
+//        DanhMuc loaiMA = new DanhMuc();
+//        loaiMA.setIdDanhMuc("57109CB2-7DA5-4245-A24C-5EF2BAD02EA3");
+//        MonAn monAn = new MonAn();
+//        monAn.setDonGia(BigDecimal.valueOf(200));
+//        monAn.setDonViTinh("suất");
+//        monAn.setMaMonAn("MA3");
+//        monAn.setTenMonAn("xyzzzzzz");
+////        monAn.setTrangThai(0);
+//        boolean add = new MonAnRepository().remove("MA3");
+//        System.out.println(add);
+        DanhMuc danhMuc = new DanhMuc();
+        danhMuc.setIdDanhMuc("E90C9CF5-5D6A-4DE0-8609-F190956442A7");
+        List<MonAn> list = new MonAnRepository().getMonAnByDanhMuc(danhMuc);
+        for (MonAn monAn : list) {
+            System.out.println(monAn.toString());
+        }
     }
 }

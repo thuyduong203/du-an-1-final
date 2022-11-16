@@ -4,6 +4,7 @@
  */
 package com.mycompany.service.impl;
 
+import com.mycompany.domainModel.DanhMuc;
 import com.mycompany.domainModel.MonAn;
 //import com.mycompany.repository.ICommon;
 import com.mycompany.repository.ICommonRepository;
@@ -19,6 +20,7 @@ public class MonAnService implements com.mycompany.service.ICommonService<MonAn,
 
     private final ICommonRepository mar = new MonAnRepository();
     private ThongBao thongBao = new ThongBao();
+    private MonAnRepository monAnRepo = new MonAnRepository();
 
     @Override
     public List<MonAn> getAll() {
@@ -50,6 +52,10 @@ public class MonAnService implements com.mycompany.service.ICommonService<MonAn,
 //        for (MonAn monAn1 : monAn) {
 //            System.out.println(monAn1.getMaMonAn()+" "+monAn1.getTenMonAn()+" "+monAn1.getLoai().());
 //        }
+    }
+
+    public List<MonAn> getMonAnByDanhMuc(DanhMuc danhMuc) {
+        return monAnRepo.getMonAnByDanhMuc(danhMuc);
     }
 
 }

@@ -5,6 +5,7 @@
 package com.mycompany.repository.impl;
 
 import com.mycompany.domainModel.GiaoDich;
+import com.mycompany.domainModel.HoaDon;
 import com.mycompany.hibernateUtil.HibernateUtil;
 import com.mycompany.repository.ICommonRepository;
 import java.util.List;
@@ -99,6 +100,17 @@ public class GiaoDichRepository implements ICommonRepository<GiaoDich, Boolean, 
                 transaction.rollback();
                 return false;
             }
+        }
+    }
+
+    //hàm để fill tiền thừa
+    public List<GiaoDich> getTheoHoaDon(HoaDon hd) {
+        try ( Session session = HibernateUtil.getFactory().openSession()) {
+            String hql = "FROM GiaoDich WHERE hoaDon = :hd";
+            Query query = session.createQuery(hql);
+            query.setParameter("hd", hd);
+            List<GiaoDich> list = query.getResultList();
+            return list;
         }
     }
 

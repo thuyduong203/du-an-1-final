@@ -5,6 +5,7 @@
 package com.mycompany.service.impl;
 
 import com.mycompany.domainModel.GiaoDich;
+import com.mycompany.domainModel.HoaDon;
 import com.mycompany.repository.impl.GiaoDichRepository;
 import com.mycompany.service.ICommonService;
 import java.util.List;
@@ -52,6 +53,10 @@ public class GiaoDichService implements ICommonService<GiaoDich, String> {
         } else {
             return "Xoa that bai";
         }
+    }
+    //hàm để fill tiền thừa
+    public List<GiaoDich> getTheoHoaDon(HoaDon hd) {
+        return gdr.getTheoHoaDon(hd);
     }
 
 }

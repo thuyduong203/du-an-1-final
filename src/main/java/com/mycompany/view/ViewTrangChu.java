@@ -71,6 +71,7 @@ public class ViewTrangChu extends javax.swing.JFrame {
     private ICommonService monAnService = new MonAnService();
     private ICommonService banService = new BanService();
     private IHoaDonChiTiet hdctService = new HoaDonChiTietService();
+    private GiaoDichService gds2 = new GiaoDichService();
     private IHoaDonChiTietResponseService hdctResponseService = new HoaDonChiTietResponseService();
     private int checkTrangThaiHD;
     private int checkTaoHD = 1;
@@ -110,18 +111,38 @@ public class ViewTrangChu extends javax.swing.JFrame {
         btnDoAn.setBackground(Color.GRAY);
         txtChuyenKhoan.setEnabled(false);
         txtTienMat.setEnabled(false);
-        txtChuyenKhoan.setText("0");
-        txtTienMat.setText("0");
         lbNhanVien.setText(nv.getMa());
-//        txtTongTien.setText("0");
-//        txtTienThua.setText("0");
-//        fillTienThua();
     }
 
-    private void fillTienThua() {
+    private void fillTienThuaChuyenKhoan() {
+//        txtTienMat.setText("0");
+        String tienMat = txtTienMat.getText();
+        if ("".equals(tienMat)) {
+            tienMat = "0";
+        }
         Double tienThua = 0.0;
-        Double tongTienTatCa = Double.valueOf(txtTienMat.getText()) + Double.valueOf(txtChuyenKhoan.getText());
-        tienThua = tongTienTatCa - Double.valueOf(txtTongTien.getText());
+        Double chuyenKhoan = 0.0;
+        try {
+            chuyenKhoan = Double.valueOf(txtChuyenKhoan.getText());
+            tienThua = (Double.valueOf(tienMat) + chuyenKhoan) - Double.valueOf(txtTongTien.getText());
+        } catch (java.lang.NumberFormatException e) {
+        }
+        txtTienThua.setText(tienThua.toString());
+    }
+
+    private void fillTienThuaTienMat() {
+//        txtChuyenKhoan.setText("0");
+        String chuyenKhoan = txtChuyenKhoan.getText();
+        if ("".equals(chuyenKhoan)) {
+            chuyenKhoan = "0";
+        }
+        Double tienThua = 0.0;
+        Double tienMat = 0.0;
+        try {
+            tienMat = Double.valueOf(txtTienMat.getText());
+            tienThua = (tienMat + Double.valueOf(chuyenKhoan)) - Double.valueOf(txtTongTien.getText());
+        } catch (java.lang.NumberFormatException e) {
+        }
         txtTienThua.setText(tienThua.toString());
     }
 
@@ -286,11 +307,9 @@ public class ViewTrangChu extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setMaximumSize(new java.awt.Dimension(1242, 620));
 
-        txtTienMat.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                txtTienMatInputMethodTextChanged(evt);
+        txtTienMat.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTienMatCaretUpdate(evt);
             }
         });
 
@@ -876,6 +895,12 @@ public class ViewTrangChu extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Chuyển khoản:");
 
+        txtChuyenKhoan.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtChuyenKhoanCaretUpdate(evt);
+            }
+        });
+
         radioTrangThaiHD.add(radioTatCa);
         radioTatCa.setText("Tất cả");
         radioTatCa.addActionListener(new java.awt.event.ActionListener() {
@@ -1133,10 +1158,13 @@ public class ViewTrangChu extends javax.swing.JFrame {
 
     private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
         // TODO add your handling code here:
+        fillTienThuaChuyenKhoan();
+        fillTienThuaTienMat();
         int index = tbHoaDon.getSelectedRow();
         HoaDonResponse hdr = lstHoaDonResponses.get(index);
         lbMaHD.setText(hdr.getMaHoaDon());
         HoaDon hd = (HoaDon) hds.getOne(lbMaHD.getText());
+        List<GiaoDich> giaoDichs = gds2.getTheoHoaDon(hd);
         lbSoBan.setText(hd.getBan().getMaBan().toString());
         if (hd.getTrangThai() == 0) {
             checkTrangThaiHD = 0;
@@ -1145,6 +1173,16 @@ public class ViewTrangChu extends javax.swing.JFrame {
         } else {
             checkTrangThaiHD = 1;
             lbMaHDThanhToan.setText("");
+        }
+        txtTienMat.setText("");
+        txtChuyenKhoan.setText("");
+        for (GiaoDich giaoDich : giaoDichs) {
+            if (giaoDich.getHinhThucThanhToan().equals("Chuyển khoản")) {
+                txtChuyenKhoan.setText(giaoDich.getSoTienThanhToan().toString());
+            }
+            if (giaoDich.getHinhThucThanhToan().equals("Tiền mặt")) {
+                txtTienMat.setText(giaoDich.getSoTienThanhToan().toString());
+            }
         }
         lstHDCTResponses = hdctResponseService.getAll(hd);
         showDataHDCT(lstHDCTResponses);
@@ -1188,9 +1226,20 @@ public class ViewTrangChu extends javax.swing.JFrame {
                 String addHD = (String) hds.update(hd, lbMaHDThanhToan.getText());
                 String setTrangThaiBan = (String) banService.update(ban, ban.getMaBan().toString());
                 JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-                lstHoaDonResponses = hoaDonResponseService.getAll();
+                if (checkRdo == 0) {
+                    lstHoaDonResponses = hoaDonResponseService.getAll();
+                    showDataHoaDon(lstHoaDonResponses);
+                } else if (checkRdo == 1) {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(0);
+                    showDataHoaDon(lstHoaDonResponses);
+                } else if (checkRdo == 2) {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(1);
+                    showDataHoaDon(lstHoaDonResponses);
+                } else {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(2);
+                    showDataHoaDon(lstHoaDonResponses);
+                }
                 lstBanResponses = banResponseService.getAll();
-                showDataHoaDon(lstHoaDonResponses);
                 showDataBan(lstBanResponses);
                 return;
             } else if (cbChuyenKhoan.isSelected()) {
@@ -1200,9 +1249,20 @@ public class ViewTrangChu extends javax.swing.JFrame {
                 String addHD = (String) hds.update(hd, lbMaHDThanhToan.getText());
                 String setTrangThaiBan = (String) banService.update(ban, ban.getMaBan().toString());
                 JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-                lstHoaDonResponses = hoaDonResponseService.getAll();
+                if (checkRdo == 0) {
+                    lstHoaDonResponses = hoaDonResponseService.getAll();
+                    showDataHoaDon(lstHoaDonResponses);
+                } else if (checkRdo == 1) {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(0);
+                    showDataHoaDon(lstHoaDonResponses);
+                } else if (checkRdo == 2) {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(1);
+                    showDataHoaDon(lstHoaDonResponses);
+                } else {
+                    lstHoaDonResponses = hoaDonResponseService.getByTrangThai(2);
+                    showDataHoaDon(lstHoaDonResponses);
+                }
                 lstBanResponses = banResponseService.getAll();
-                showDataHoaDon(lstHoaDonResponses);
                 showDataBan(lstBanResponses);
                 return;
             } else {
@@ -1325,11 +1385,6 @@ public class ViewTrangChu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tbBan1MouseClicked
 
-    private void txtTienMatInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtTienMatInputMethodTextChanged
-        // TODO add your handling code here:
-//        fillTienThua();
-    }//GEN-LAST:event_txtTienMatInputMethodTextChanged
-
     private void btnBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanActionPerformed
         // TODO add your handling code here:
         ViewBan viewBan = new ViewBan(nhanV);
@@ -1410,6 +1465,16 @@ public class ViewTrangChu extends javax.swing.JFrame {
         lstHoaDonResponses = hoaDonResponseService.getByTrangThai(2);
         showDataHoaDon(lstHoaDonResponses);
     }//GEN-LAST:event_radioDaHuyActionPerformed
+
+    private void txtChuyenKhoanCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtChuyenKhoanCaretUpdate
+        // TODO add your handling code here:
+        fillTienThuaChuyenKhoan();
+    }//GEN-LAST:event_txtChuyenKhoanCaretUpdate
+
+    private void txtTienMatCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienMatCaretUpdate
+        // TODO add your handling code here:
+        fillTienThuaTienMat();
+    }//GEN-LAST:event_txtTienMatCaretUpdate
 
     /**
      * @param args the command line arguments

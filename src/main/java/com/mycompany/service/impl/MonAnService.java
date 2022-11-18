@@ -5,6 +5,7 @@
 package com.mycompany.service.impl;
 
 import com.mycompany.domainModel.DanhMuc;
+import com.mycompany.domainModel.KhuyenMai;
 import com.mycompany.domainModel.MonAn;
 //import com.mycompany.repository.ICommon;
 import com.mycompany.repository.ICommonRepository;
@@ -45,6 +46,18 @@ public class MonAnService implements com.mycompany.service.ICommonService<MonAn,
     @Override
     public String remove(String ma) {
         return thongBao.thongBaoDELETE((Boolean) mar.remove(ma));
+    }
+
+    public List<MonAn> getMonAnByKhuyenMai(KhuyenMai khuyenMai) {
+        return monAnRepo.getMonAnByKhuyenMai(khuyenMai);
+    }
+
+    public String themKMChoMonAn(KhuyenMai khuyenMai, String maMA) {
+        if (monAnRepo.themKMChoMonAn(khuyenMai, maMA)) {
+            return "Áp dụng KM cho món ăn thành công";
+        } else {
+            return "Áp dụng Km ko thành công";
+        }
     }
 
     public static void main(String[] args) {

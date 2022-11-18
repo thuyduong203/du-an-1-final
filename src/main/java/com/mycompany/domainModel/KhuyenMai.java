@@ -6,6 +6,7 @@ package com.mycompany.domainModel;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -67,8 +68,24 @@ public class KhuyenMai {
     @Column(name = "TrangThai")
     private Integer trangThai;
 
+    public int trangThaiKM(KhuyenMai khuyenMai) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date todaySys = new java.util.Date();
+        Date today = (Date.valueOf(dateFormat.format(todaySys)));
+        Date ngayBD = (Date.valueOf(dateFormat.format(khuyenMai.thoiGianBD)));
+        Date ngayKT = (Date.valueOf(dateFormat.format(khuyenMai.thoiGianKT)));
+        if (ngayBD.compareTo(today) <= 0 && ngayKT.compareTo(today) >= 0) {
+            khuyenMai.setTrangThai(0);
+//            return "Đang áp dụng";
+        } else {
+            khuyenMai.setTrangThai(1);
+//            return "Không trong thời gian áp dụng";
+        }
+        return khuyenMai.getTrangThai();
+    }
+
     public Object[] toDataRowViewKM(int stt) {
-        return new Object[]{stt, maKhuyenMai, tenKhuyenMai, (trangThai == 0 ? "Đang áp dụng" : "Ngừng áp dụng")};
+        return new Object[]{stt, maKhuyenMai, tenKhuyenMai, (trangThaiKM(this) == 0 ? "Đang áp dụng" : "Ko trong tgian áp dụng")};
     }
 
 }

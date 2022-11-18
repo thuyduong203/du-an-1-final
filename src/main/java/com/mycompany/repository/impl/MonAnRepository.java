@@ -5,6 +5,7 @@
 package com.mycompany.repository.impl;
 
 import com.mycompany.domainModel.DanhMuc;
+import com.mycompany.domainModel.KhuyenMai;
 import com.mycompany.domainModel.Loai;
 import com.mycompany.domainModel.MonAn;
 import com.mycompany.hibernateUtil.HibernateUtil;
@@ -111,6 +112,38 @@ public class MonAnRepository implements ICommonRepository<MonAn, Boolean, String
         } finally {
             return listMA;
         }
+    }
+////thêm hàm getMoNAn theo khuyến mãi:
+
+    public List<MonAn> getMonAnByKhuyenMai(KhuyenMai khuyenMai) {
+        List<MonAn> listMA = new ArrayList<>();
+        try ( Session session = HibernateUtil.getFactory().openSession()) {
+            Query query = session.createQuery("FROM MonAn WHERE khuyenMai = :KM");
+            query.setParameter("KM", khuyenMai);
+            listMA = query.getResultList();
+        } finally {
+            return listMA;
+        }
+    }
+    ////update khuyến mãi cho món ăn
+
+    public boolean themKMChoMonAn(KhuyenMai khuyenMai, String maMA) {
+        String hql = "UPDATE " + fromTable + "SET khuyenMai = :KM "
+                + "WHERE maMonAn =:ma";
+        Transaction transaction = null;
+        int check = 0;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            query.setParameter("KM", khuyenMai);
+            query.setParameter("ma", maMA);
+            check = query.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
+        return check > 0;
     }
 
     public static void main(String[] args) {

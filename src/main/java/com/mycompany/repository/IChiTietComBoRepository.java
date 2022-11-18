@@ -13,14 +13,20 @@ import java.util.List;
  */
 //O2 với O3 là điều kiện để update với remove
 //I la dieu kien de xoa
-public interface IChiTietComBoRepository<O, B,I, O2, O3> {
+public interface IChiTietComBoRepository<O, B, I, O2, O3> {
 
     List<O> getAll();
 
     B add(O ctcb);
 
-    B update(O chiTietComBo, O2 comBo,O3 monAn);
+    B update(O chiTietComBo, O2 comBo, O3 monAn);
 
-    B remove(O chiTietComBo, O2 comBo,O3 monAn);
+    B remove(O chiTietComBo, O2 comBo, O3 monAn);
+
+    List<O> getAllByComBo(O2 id);
+
+    O getOneById(O chiTietComBo);
+
+    B updateSoLuong(O chiTietComBo, O2 comBo, int soLuong);
 
 }

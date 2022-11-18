@@ -19,4 +19,11 @@ public interface IChiTietComBoService<O, S, I, O2, O3> {
     S update(O chiTietComBo, O2 comBo, O3 monAn);
 
     S remove(O chiTietComBo, O2 comBo, O3 monAn);
+
+    List<O> getAllByComBo(O2 id);
+    
+    S updateSoLuong(O chiTietComBo, O2 comBo, int soLuong);
+    
+    O getOneById(O chiTietComBo);
+    
 }

@@ -18,7 +18,7 @@ import org.hibernate.Transaction;
  *
  * @author Admin
  */
-public class ChiTietComBoRepository implements IChiTietComBoRepository<ChiTietComBo, Boolean,Integer, ComBo, MonAn> {
+public class ChiTietComBoRepository implements IChiTietComBoRepository<ChiTietComBo, Boolean, Integer, ComBo, MonAn> {
 
     private static final Session session = HibernateUtil.getFactory().openSession();
     private String fromTable = "FROM ChiTietComBo ";
@@ -70,7 +70,7 @@ public class ChiTietComBoRepository implements IChiTietComBoRepository<ChiTietCo
     }
 
     @Override
-    public Boolean remove(ChiTietComBo ctcb, ComBo comBo,MonAn monAn) {
+    public Boolean remove(ChiTietComBo ctcb, ComBo comBo, MonAn monAn) {
         String hql = "DELETE " + fromTable
                 + "WHERE comBo = :comBo AND monAn = :monAn and soLuongMonAn = :soLuongMonAn";
         Transaction transaction = null;
@@ -90,13 +90,56 @@ public class ChiTietComBoRepository implements IChiTietComBoRepository<ChiTietCo
         }
         return check > 0;
     }
+
     public static void main(String[] args) {
         MonAn ma = new MonAn();
         ma.setId("F140701F-1D94-49E6-97EC-46CDAB6D9EC6");
         ComBo comBo = new ComBo();
         comBo.setId("E791ED65-7819-44F0-BFF3-BEE9795F6E5D");
         ChiTietComBo ctcb = new ChiTietComBo(null, comBo, ma, 10);
-        Boolean test = new ChiTietComBoRepository().update(ctcb,comBo,ma);
+        Boolean test = new ChiTietComBoRepository().update(ctcb, comBo, ma);
         System.out.println(test);
+    }
+
+    @Override
+    public List<ChiTietComBo> getAllByComBo(ComBo comBo) {
+        Query query = session.createQuery(fromTable + "WHERE comBo = :ComBo");
+        query.setParameter("ComBo", comBo);
+        List<ChiTietComBo> chiTietComBos = query.getResultList();
+        return chiTietComBos;
+    }
+
+    @Override
+    public Boolean updateSoLuong(ChiTietComBo chiTietComBo, ComBo comBo, int soLuong) {
+        String hql = "UPDATE " + fromTable + "SET soLuongMonAn = :soLuongMonAn "
+                + "WHERE comBo = :comBo AND id = :Id";
+        Transaction transaction = null;
+        int check = 0;
+        try {
+            transaction = session.beginTransaction();
+            session.clear();
+            Query query = session.createQuery(hql);
+            query.setParameter("soLuongMonAn", soLuong);
+            query.setParameter("comBo", comBo);
+            query.setParameter("Id", chiTietComBo.getId());
+            check = query.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
+        return check > 0;
+    }
+
+    @Override
+    public ChiTietComBo getOneById(ChiTietComBo chiTietComBo) {
+        Query query = session.createQuery(fromTable + " WHERE id = :Id");
+        query.setParameter("Id", chiTietComBo.getId());
+        try {
+            ChiTietComBo chiTietComBos = (ChiTietComBo) query.getSingleResult();
+            return chiTietComBos;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

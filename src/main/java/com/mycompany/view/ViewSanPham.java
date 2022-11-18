@@ -696,8 +696,8 @@ public class ViewSanPham extends javax.swing.JFrame {
 
     private void btnAddComBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddComBoActionPerformed
         // TODO add your handling code here:
-        JDialogComBo viewComBo = new JDialogComBo(this, true);
-        viewComBo.setVisible(true);
+//        JDialogComBo viewComBo = new JDialogComBo(this, true);
+//        viewComBo.setVisible(true);
     }//GEN-LAST:event_btnAddComBoActionPerformed
 
     private void btnAddDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDanhMucActionPerformed

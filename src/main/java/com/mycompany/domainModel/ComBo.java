@@ -62,7 +62,7 @@ public class ComBo {
 //    
 //    @OneToMany(mappedBy = "comBo", fetch = FetchType.LAZY)
 //    private List<HoaDonChiTiet> listHDCT;
-    public Object[] toDataRow() {
-        return new Object[]{maCB, tenCB, donGia,};
+    public Object[] toDataRow(int i) {
+        return new Object[]{i, maCB, tenCB, donGia,};
     }
 }

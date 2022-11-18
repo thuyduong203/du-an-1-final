@@ -51,4 +51,8 @@ public class ChiTietComBo {
     public Object[] toDataRow(int stt) {
         return new Object[]{stt, comBo.getMaCB(), comBo.getTenCB(), monAn.getTenMonAn(), soLuongMonAn};
     }
+
+    public Object[] toShowData(int stt) {
+        return new Object[]{stt, comBo.getTenCB(), monAn.getTenMonAn(), soLuongMonAn};
+    }
 }

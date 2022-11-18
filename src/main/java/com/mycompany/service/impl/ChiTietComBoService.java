@@ -10,6 +10,7 @@ import com.mycompany.domainModel.MonAn;
 import com.mycompany.repository.IChiTietComBoRepository;
 import com.mycompany.repository.impl.ChiTietComBoRepository;
 import com.mycompany.service.IChiTietComBoService;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,6 +52,7 @@ public class ChiTietComBoService implements IChiTietComBoService<ChiTietComBo, S
             return "Xoá thất bại";
         }
     }
+
     public static void main(String[] args) {
         MonAn ma = new MonAn();
         ma.setId("CFCA2AD6-A346-4C54-A3A8-279D6D782BA7");
@@ -63,6 +65,49 @@ public class ChiTietComBoService implements IChiTietComBoService<ChiTietComBo, S
         for (ChiTietComBo chiTietComBo : chiTietComBos) {
             System.out.println(chiTietComBo);
         }
+    }
+
+    @Override
+    public List<ChiTietComBo> getAllByComBo(ComBo id) {
+        return ctcbr.getAllByComBo(id);
+    }
+
+    public ChiTietComBo checkCTComBo(ComBo comBo, MonAn monAn) {
+        List<ChiTietComBo> ctCB = getAllByComBo(comBo);
+        for (ChiTietComBo ct : ctCB) {
+            if (monAn.getId().equals(ct.getMonAn().getId())) {
+                return ct;
+            }
+        }
+        return null;
+    }
+
+    public String saveOrUpdate(ComBo comBo, MonAn monAn, ChiTietComBo chiTietComBo) {
+        if (checkCTComBo(comBo, monAn) == null) {
+            // add
+            return add(chiTietComBo);
+        } else {
+            // update
+            // chi tiết có sẵn;
+            ChiTietComBo c = checkCTComBo(comBo, monAn);
+            int soLuong = c.getSoLuongMonAn() + chiTietComBo.getSoLuongMonAn();
+            return updateSoLuong(c, comBo, soLuong);
+        }
+    }
+
+    @Override
+    public String updateSoLuong(ChiTietComBo chiTietComBo, ComBo comBo, int soLuong) {
+        if ((boolean) ctcbr.updateSoLuong(chiTietComBo, comBo, soLuong) == true) {
+            return "sửa thành công";
+        } else {
+            return "sửa không thành công";
+        }
+    }
+
+    @Override
+    public ChiTietComBo getOneById(ChiTietComBo chiTietComBo) {
+        ChiTietComBo cb = (ChiTietComBo) ctcbr.getOneById(chiTietComBo);
+        return cb;
     }
 
 }
